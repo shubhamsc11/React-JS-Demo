@@ -1,48 +1,66 @@
 // import logo from './logo.svg';
 import './App.css';
+// import About from './components/About';
+import Alert from './components/Alert';
+import Navbar from './components/Navbar';
+import TextForm from './components/TextForm';
+import React, { useState } from 'react'
 
 function App() {
+  const [mode, setMode] = useState('light');
+  const [toggleText, setToggleText] = useState('Dark Mode')
+  const [toggleTextColor, setToggleTextColor] = useState('black')
+  const [formContentColor, setFormContentColor] = useState({
+    color: 'black',
+    backgroundColor: 'white'
+  })
+
+  const [alert, setAleart] = useState(null);
+
+  const switchMode = () => {
+    if (mode ===  'light'){
+      setMode('dark')
+      setToggleText('Light Mode')
+      setToggleTextColor('white')
+      setFormContentColor({
+        color: 'white',
+        backgroundColor: '#283642',
+        border: '1px solid white'
+      });
+      showAlert('success', 'Dark mode is enabled now!');
+    }
+    else{
+      setMode('light')
+      setToggleText('Dark Mode')
+      setToggleTextColor('black')
+      setFormContentColor({
+        color: 'black',
+        backgroundColor: 'white',
+      })
+      showAlert('warning', 'Light mode is enabled now!');
+    }
+  };
+
+  const showAlert = (status, message) => {
+    setAleart({
+      message: message,
+      status: status
+    })
+  }
+
   return (
-    <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/"><b>TextUtils</b></a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">About Us</a>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/">Action</a></li>
-                  <li><a className="dropdown-item" href="/">Another action</a></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><a className="dropdown-item" href="/">Something else here</a></li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" href="/" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    </>
+    <div style={{color: formContentColor.color, backgroundColor: formContentColor.backgroundColor}}>
+      <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={switchMode} toggleText={toggleText} toggleTextColor={toggleTextColor} />
+      <Alert alert={alert} />
+      <div className='container my-3'>
+        {/* <TextForm heading="Testing Textarea" formContentColor={formContentColor} /> */}
+        <TextForm heading="Testing Textarea" />
+      </div>
+      {/* <div className='container my-3'>
+        <About />
+      </div> */}
+    </div>
   );
 }
 
 export default App;
-
