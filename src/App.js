@@ -1,10 +1,12 @@
 // import logo from './logo.svg';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import React, { useState, useEffect } from 'react'
+import ErrorPage from './components/ErrorPage';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -75,17 +77,29 @@ function App() {
   }
 
   return (
-    <div style={{color: formContentColor.color, backgroundColor: formContentColor.backgroundColor}}>
-      <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={switchMode} toggleText={toggleText} toggleTextColor={toggleTextColor} />
-      <Alert alert={alert} />
-      <div className='container my-3'>
-        {/* <TextForm heading="Testing Textarea" formContentColor={formContentColor} /> */}
-        <TextForm heading="Testing Textarea" showAlert={showAlert} />
+    <Router>
+      <div style={{color: formContentColor.color, backgroundColor: formContentColor.backgroundColor}}>
+        <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={switchMode} toggleText={toggleText} toggleTextColor={toggleTextColor} />
+        <Alert alert={alert} />
+        {/* <div className='container my-3'>
+          <TextForm heading="Testing Textarea" formContentColor={formContentColor} />
+          <TextForm heading="Testing Textarea" showAlert={showAlert} />
+        </div> */}
+        {/* <div className='container my-3'>
+          <About />
+        </div> */}
+
+        <div className='container my-3'>
+          <Routes>
+            <Route path="*" element={<ErrorPage/>} /> 
+            <Route path="/" element={<TextForm />} />
+            <Route exact path="/home" element={<TextForm />} />
+            <Route exact path="/about-us" element={<About/>} />
+          </Routes>
+        </div>
+
       </div>
-      {/* <div className='container my-3'>
-        <About />
-      </div> */}
-    </div>
+    </Router>
   );
 }
 
