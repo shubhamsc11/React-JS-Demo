@@ -4,7 +4,7 @@ import './App.css';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -16,6 +16,31 @@ function App() {
   })
 
   const [alert, setAleart] = useState(null);
+
+  const setDefaultTitle = () => {
+    setTimeout(() => {
+      document.title = 'TextUtils';
+    }, 4000);
+  }
+
+  // will change title automtically when mode is change.
+  useEffect(() => {
+    if (mode === 'dark') {
+      setTimeout(() => {
+        document.title = 'TextUtils: Dark Mode';
+      }, 1000);
+      setDefaultTitle();
+    }
+    else if (mode === 'light') {
+      setTimeout(() => {
+        document.title = 'TextUtils: Light Mode';
+      }, 1000);
+      setDefaultTitle();
+    }
+    else {
+      document.title = 'TextUtils';
+    }
+  }, [mode]);
 
   const switchMode = () => {
     if (mode ===  'light'){
@@ -38,6 +63,7 @@ function App() {
         backgroundColor: 'white',
       })
       showAlert('warning', 'Light mode is enabled now!');
+      document.title = 'TextUtils'
     }
   };
 
@@ -54,7 +80,7 @@ function App() {
       <Alert alert={alert} />
       <div className='container my-3'>
         {/* <TextForm heading="Testing Textarea" formContentColor={formContentColor} /> */}
-        <TextForm heading="Testing Textarea" />
+        <TextForm heading="Testing Textarea" showAlert={showAlert} />
       </div>
       {/* <div className='container my-3'>
         <About />
