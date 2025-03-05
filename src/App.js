@@ -92,8 +92,8 @@ function App() {
         <div className='container my-3'>
           <Routes>
             <Route path="*" element={<ErrorPage/>} /> 
-            <Route path="/" element={<TextForm />} />
-            <Route exact path="/home" element={<TextForm />} />
+            <Route path="/" element={<TextForm showAlert={showAlert}/>} />
+            <Route exact path="/home" element={<TextForm showAlert={showAlert}/>} />
             <Route exact path="/about-us" element={<About/>} />
           </Routes>
         </div>
