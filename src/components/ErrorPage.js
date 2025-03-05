@@ -1,5 +1,4 @@
 import React from 'react';
-import '/home/rails/STPL/textutils/src/index.css';
 
 const ErrorPage = () => {
   const handleBackClick = () => {
