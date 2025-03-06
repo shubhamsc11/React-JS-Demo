@@ -77,8 +77,8 @@ function App() {
   }
 
   return (
-    <Router>
-      <div style={{color: formContentColor.color, backgroundColor: formContentColor.backgroundColor}}>
+    <div style={{color: formContentColor.color, backgroundColor: formContentColor.backgroundColor}}>
+      <Router>
         <Navbar title="TextUtils" aboutText="About Us" mode={mode} toggleMode={switchMode} toggleText={toggleText} toggleTextColor={toggleTextColor} />
         <Alert alert={alert} />
         {/* <div className='container my-3'>
@@ -91,15 +91,14 @@ function App() {
 
         <div className='container my-3'>
           <Routes>
-            <Route path="*" element={<ErrorPage/>} /> 
+            <Route path="*" element={<ErrorPage />} /> 
             <Route path="/" element={<TextForm showAlert={showAlert}/>} />
             <Route exact path="/home" element={<TextForm showAlert={showAlert}/>} />
-            <Route exact path="/about-us" element={<About/>} />
+            <Route exact path="/about-us" element={<About formContentColor={formContentColor}/>} />
           </Routes>
         </div>
-
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 

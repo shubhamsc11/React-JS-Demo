@@ -4,7 +4,6 @@ import 'animate.css';
 
 export default function TextForm(props) {
   const changeTextToUppercase = () => {
-    // console.log('Clicked on uppercase!!!' + "\nold text - ", text);
     // setText(text.toUpperCase());
     updatePresent(state.toUpperCase());
     props.showAlert('light', 'Text converted in the uppercase!')
@@ -44,7 +43,7 @@ export default function TextForm(props) {
 
   const reverseText = () => {
     // setText(text.split('').reverse().join(''));
-    updatePresent(state.split('').reverse().join(''));
+    updatePresent(state.split(/\s+/).reverse().join(''));
   }
 
   const handleCopyClick = () => {
@@ -63,7 +62,7 @@ export default function TextForm(props) {
 
   // const [text, setText] = useState('');
   const { state, undo, redo, updatePresent } = useUndoRedo('');
-  const wordsLength = state.trim().length > 0 ? state.split(' ').filter(String).length : 0
+  const wordsLength = state.trim().length > 0 ? state.split(/\s+/).filter(String).length : 0
 
   return (
     <>
@@ -94,7 +93,7 @@ export default function TextForm(props) {
 
       <div className='container my-3'>
         <h4>Your Entered Text Summary</h4>
-        <p>Words: {wordsLength} and Characters: {state.split(' ').join('').length}</p>
+        <p>Words: {wordsLength} and Characters: {state.split(/\s+/).join('').length}</p>
         <p>Minutes Read: {0.008 * wordsLength}</p>
       </div>
 
